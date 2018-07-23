@@ -1,0 +1,45 @@
+{
+  "name": "angularjs-directive-rendered",
+  "version": "1.0.0",
+  "description": "A tool for rendering AngularJS directives, aimed for UI tests",
+  "main": "index.js",
+  "author": "Omri Lavi <omril321@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "1.5.11"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.5.11",
+    "babel-core": "6.26.0",
+    "babel-jest": "21.2.0",
+    "babel-loader": "7.1.2",
+    "babel-plugin-angularjs-annotate": "0.8.2",
+    "babel-preset-env": "1.6.0",
+    "concurrently": "3.5.0",
+    "cypress": "^3.0.2",
+    "html-webpack-plugin": "2.30.1",
+    "jest": "21.2.1",
+    "raw-loader": "0.5.1",
+    "serve": "6.2.0",
+    "webpack": "3.6.0"
+  },
+  "scripts": {
+    "start": "concurrently \"npm run build:watch\" \"npm run serve\"",
+    "serve": "serve ./build",
+    "build": "webpack",
+    "build:watch": "webpack --watch",
+    "test": "jest --watch",
+    "cypress:open": "cypress open"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "setupTestFrameworkScriptFile": "<rootDir>/jest/setup.js",
+    "transform": {
+      "^.+\\.(js|jsx)$": "babel-jest",
+      "^(?!.*\\.(js|jsx|json)$)": "<rootDir>/jest/fileTransform.js"
+    }
+  }
+}

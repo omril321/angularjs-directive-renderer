@@ -22,10 +22,11 @@ const addCompiledElementToDocument = (doc, template, injectedScopeProperties) =>
     const elementUnderTest = angular.element(body.querySelector(`#${wrapperDivId}`).firstChild);
     const elementScope = elementUnderTest.scope();
 
+    debugger;
     addInjectionsToScope(elementScope, injectedScopeProperties);
     $compile(elementUnderTest)(elementScope);
 
-    elementScope.$apply();
+    elementScope.$digest();
     return elementUnderTest;
 };
 
@@ -37,7 +38,7 @@ const removeBodyContentFromDoc = (doc) => {
 };
 
 
-const loadDirectiveAsComponent = ({
+const loadIsolatedDirective = ({
                                       doc = document,
                                       templateToCompile = "Supply a directive template",
                                       injectedScopeProperties = {},
@@ -46,14 +47,4 @@ const loadDirectiveAsComponent = ({
     return addCompiledElementToDocument(doc, templateToCompile, injectedScopeProperties);
 };
 
-if (cy || Cypress) {
-    Cypress.Commands.add('loadDirectiveAsComponent', (paramsObj) => {
-        cy.document()
-            .then(cyDoc => {
-            paramsObj.doc = paramsObj.doc || cyDoc;
-            return loadDirectiveAsComponent(paramsObj)
-        })
-    })
-}
-
-export default loadDirectiveAsComponent;
+export default loadIsolatedDirective;

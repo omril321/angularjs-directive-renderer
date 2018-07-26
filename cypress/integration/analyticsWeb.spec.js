@@ -18,7 +18,7 @@ describe('analytics web', () => {
         });
 
         cy.getTestedDirectiveElement()
-            .then(elem => expect(elem.isolateScope().checkboxModel).to.be.false) //TODO: is there a way to make the workflow with the scope less awkward? see checkboxModel VS checkboxSelected in the injected scope.
+            .then(elem => expect(elem.isolateScope().checkboxModel).to.be.false) //TODO: is there a way to make the workflow with the scope less awkward? see checkboxModel VS checkboxSelected in the injected scope. ==> possible solution - inject an entire scope object (like the solution for ng-if scoping)
 
         cy.getTestedDirectiveElement()
             .screenshot()

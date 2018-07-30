@@ -31,7 +31,7 @@ describe('my-directive', () => {
         const testedElement = loadIsolatedDirective({ 
                     doc: document, //3
                     templateToCompile: `<my-directive name="data.name" some-array="data.testArr"></my-directive>`, //4
-                    injectedScope: {data}, //5
+                    injectedScopeProperties: {data}, //5
                 });
         
         testedElement.find('#my-button').click();//6
@@ -46,7 +46,7 @@ Explanation:
 If not specified, the global variable `document` will be used.  
 It is expected that `angular` will be defined on the page, and that an `ng-app` will exist somewhere on this page.
 4. `templateToCompile` - Specify the template which will render the tested directive instance (don't forget the injected properties, that should match the data from step 2).
-5. `injectedScope` (Optional) - specify the scope properties which will be passed to the scope of the created directive instance (data is copied, and then injected by `$compile` service).  
+5. `injectedScopeProperties` (Optional) - specify the scope properties which will be passed to the scope of the created directive instance (data is copied, and then injected by `$compile` service).  
 Default value is an empty object (`{}`)
 6. Interact with the returned element, as test it as you wish.
 

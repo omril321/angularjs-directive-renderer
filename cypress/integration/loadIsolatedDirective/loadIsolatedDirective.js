@@ -1,3 +1,5 @@
+import detectDocumentAngular from './detectDocumentAngular';
+
 const addInjectionsToScope = (scope, objectToInject) => {
     for (const k in objectToInject) {
         if (objectToInject.hasOwnProperty(k)) {
@@ -10,10 +12,11 @@ const addInjectionsToScope = (scope, objectToInject) => {
 const addCompiledElementToDocument = (doc, template, injectedScopeProperties) => {
     const body = doc.body;
 
-    const angular = doc.defaultView.angular;
+    const angular = detectDocumentAngular(doc);
     expect(angular, 'angular should be defined in the loaded application').not.to.be.undefined;
 
-    const injector = angular.element('*[ng-app]').injector(); //TODO: if this works, this needs to run before removing the body elements
+    const ngAppElement = doc.querySelector('*[ng-app]');
+    const injector = angular.element(ngAppElement).injector(); //TODO: if this works, this needs to run before removing the body elements
     const $compile = injector.get('$compile');
 
     const wrapperDivId = "directive-test-wrapper-element"; //TODO: is there a way of reducing the usage of this element?
@@ -22,7 +25,6 @@ const addCompiledElementToDocument = (doc, template, injectedScopeProperties) =>
     const elementUnderTest = angular.element(body.querySelector(`#${wrapperDivId}`).firstChild);
     const elementScope = elementUnderTest.scope();
 
-    debugger;
     addInjectionsToScope(elementScope, injectedScopeProperties);
     $compile(elementUnderTest)(elementScope);
 

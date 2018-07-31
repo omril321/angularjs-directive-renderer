@@ -10,33 +10,112 @@ Read the instructions below to see how you can write full UI tests for your comp
 
 TODO
 
-## Usage...
+## API Reference
+### loadIsolatedDirective
+The library exports a main function - `loadIsolatedDirective(config)`, 
+which can be used to load a directive on an almost isolated environment (*).
+The function expects a single `config` object, with the following properties:
+* `doc`: Document (Optional) - the document of the page which loaded your application. 
+If omitted, the global `document` will be used instead
+* `injectedScopeProperties`: Object (Optional) - default value is an empty object (`{}`). 
+Specify the scope properties which will be passed to the scope of the created directive instance 
+It is important to note that the tested directive will receive a *new* scope. 
+If you wish to access the injected scope directly from your scope, without any other tools, 
+then you should bind your data to a property of the scope, and not directly to the scope.
+Read more on [this StackOverflow question](https://github.com/angular/angular.js/wiki/Understanding-Scopes#javascript-prototypal-inheritance),
+and on [AngularJS wiki - JavaScript Prototypal Inheritance](https://stackoverflow.com/questions/30787147/angularjs-ng-if-and-scopes)
+* `templateToCompile`: String - the template which will render the tested directive instance 
+Don't forget the injected properties, that should match the data from `injectedScopeProperties` (if it exists).
 
-### ... As a library
-The following example will load the tested directive as an isolated component:
-```jsx harmony
-import loadIsolatedDirective from 'loadIsolatedDirective'; //1
+> \* Almost isolated environment 
 
-describe('my-directive', () => {
+Since the library requires a document of a loaded application, 
+it is possible that the loaded page will perform actions that will affect the test.  
+From this reason, it is recommended to use a page which simply loads all of your assets (scripts and stylesheets).
+
+### Cypress commands
+If you use Cypress, the library will automatically add a few useful commands to Cypress when it is `import`-ed.
+
+
+* `cy.loadIsolatedDirective` - loads an isolated directive using Cypress' IFrame's document as the tested document.
+The function requires the same configuration object as the library's `loadIsolatedDirective`, *except* for the `doc` property - 
+Cypress will supply the document. 
+If `doc` will be defined, it will be used instead of Cypress' document
+This way, you can easily test your app using the following flow:
+```javascript
     beforeEach(() => {
-        //load your application, with all your `/dist` files
-    });
+          cy.visit('http://localhost:1234'); //webpack-dev-server for example, which serves your entire app
+      });
     
-    it('should load my-directive, and displayed properly', () => {
-        const data = { //2
-            name: 'test',
-            testArr: ['wow', 'much', 'data'],
-        };
-        
-        const testedElement = loadIsolatedDirective({ 
-                    doc: document, //3
-                    templateToCompile: `<my-directive name="data.name" some-array="data.testArr"></my-directive>`, //4
-                    injectedScopeProperties: {data}, //5
-                });
-        
-        testedElement.find('#my-button').click();//6
+    it('should look as expected', () => {
+      cy.loadIsolatedDirective({
+          templateToCompile: '<my-awesome-directive/>'
+      })
+      .screenshot();
     });
-});
+```
+
+
+* `cy.getTestedElementScope()` - quickly access your compiled element's scope, and start a Cypress chain:
+For example:
+```javascript
+    cy.getTestedElementScope().then(scope => expect(scope.myBoolean).to.be.false);
+```
+
+
+* `cy.getAngular()` - access your application's global `angular` object. 
+Can be used for special requirements, where you wish to use `angular` directly from the running application.
+
+
+* `cy.getTestedDirectiveDomElement()` - quickly access your compiled directive's DOM element, and start a Cypress chain: 
+```javascript
+    cy.loadIsolatedDirective({
+            templateToCompile: '<my-awesome-directive/>'
+        })
+        .find('input')
+        .click()
+        .screenshot();
+    
+    cy.getTestedDirectiveDomElement()
+    .click()
+    .screenshot();
+```
+
+You can also access the element using `cy.get('@testedDirectiveElement')` (which is exactly what `cy.getTestedDirectiveElement` does).
+
+**IMPORTANT NOTE** - this function is used to access the DOM element, and not the compiled AngularJS element. 
+This means the the element can be interacted with (using `click()` for example), 
+but it will not have AngularJS' functionality, like `scope()`.
+If you only need the element's scope, use the convenient method `cy.getTestedElementScope()`.
+If you need the element as an AngularJS element, use in combination with `cy.getAngular()`.
+
+
+## Usage example
+
+The following example will load the tested directive as an isolated component:
+```javascript
+    import loadIsolatedDirective from 'loadIsolatedDirective'; //1
+    
+    describe('my-directive', () => {
+        beforeEach(() => {
+            //load your application, with all your `/dist` files
+        });
+        
+        it('should load my-directive, and displayed properly', () => {
+            const data = { //2
+                name: 'test',
+                testArr: ['wow', 'much', 'data'],
+            };
+            
+            const testedElement = loadIsolatedDirective({ 
+                        doc: document, //3
+                        templateToCompile: `<my-directive name="data.name" some-array="data.testArr"/>`, //4
+                        injectedScopeProperties: {data}, //5
+                    });
+            
+            testedElement.find('#my-button').click();//6
+        });
+    });
 ```
 
 Explanation:
@@ -50,40 +129,6 @@ It is expected that `angular` will be defined on the page, and that an `ng-app` 
 Default value is an empty object (`{}`)
 6. Interact with the returned element, as test it as you wish.
 
-
-### ... As a Cypress command
-#### `cy.loadIsolatedDirective`
-Use `cy.loadIsolatedDirective()` to use Cypress' IFrame's document as the tested document.
-This way, you can easily test your app using the following flow:
-```javascript
- beforeEach(() => {
-        cy.visit('http://localhost:1234'); //webpack-dev-server for example, which serves your entire app
-    });
-
-it('should look as expected', () => {
-    cy.loadIsolatedDirective({
-        templateToCompile: '<my-awesome-directive/>'
-    })
-    .screenshot();
-});
-```
-#### `cy.getTestedDirectiveElement`
-Use `cy.getTestedDirectiveElement` to quickly access your compiled element, and start a Cypress chain.
-For example:
-```javascript
-cy.loadIsolatedDirective({
-        templateToCompile: '<my-awesome-directive/>'
-    })
-    .find('input')
-    .click()
-    .screenshot();
-
-cy.getTestedDirectiveElement()
-.click()
-.screenshot();
-```
-
-You can also access the element using `cy.get('@testedDirectiveElement')` (which is exactly what `cy.getTestedDirectiveElement` does)
 
 ## License
 

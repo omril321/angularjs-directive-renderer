@@ -1,5 +1,7 @@
 import detectDocumentAngular from './detectDocumentAngular';
 
+const WRAPPER_DIV_ID = "directive-test-wrapper-element"; //TODO: is there a way of reducing the usage of this element?
+
 const addInjectionsToScope = (scope, objectToInject) => {
     for (const k in objectToInject) {
         if (objectToInject.hasOwnProperty(k)) {
@@ -19,10 +21,9 @@ const addCompiledElementToDocument = (doc, template, injectedScopeProperties) =>
     const injector = angular.element(ngAppElement).injector(); //TODO: if this works, this needs to run before removing the body elements
     const $compile = injector.get('$compile');
 
-    const wrapperDivId = "directive-test-wrapper-element"; //TODO: is there a way of reducing the usage of this element?
-    body.innerHTML += `<div id=${wrapperDivId}>${template}</div>`;
+    body.innerHTML += `<div id=${WRAPPER_DIV_ID}>${template}</div>`;
 
-    const elementUnderTest = angular.element(body.querySelector(`#${wrapperDivId}`).firstChild);
+    const elementUnderTest = angular.element(body.querySelector(`#${WRAPPER_DIV_ID}`).firstChild);
     const elementScope = elementUnderTest.scope();
 
     addInjectionsToScope(elementScope, injectedScopeProperties);
@@ -32,21 +33,26 @@ const addCompiledElementToDocument = (doc, template, injectedScopeProperties) =>
     return elementUnderTest;
 };
 
-const removeBodyContentFromDoc = (doc) => {
+const removeBodyContentFromDocExceptTestedDirective = (doc) => {
     const allChildren = Array.from(doc.body.children);
-    const toRemove = allChildren.filter(child => child.tagName.toUpperCase() !== "SCRIPT");
+    const isNotScriptOrTestedDirective = (element => {
+        return element.tagName.toUpperCase() !== "SCRIPT" && element.id !== WRAPPER_DIV_ID;
+    });
+
+    const toRemove = allChildren.filter(isNotScriptOrTestedDirective);
     toRemove.forEach(child => child.remove());
     return doc;
 };
 
 
 const loadIsolatedDirective = ({
-                                      doc = document,
-                                      templateToCompile = "Supply a directive template",
-                                      injectedScopeProperties = {},
-                                  }) => {
-    removeBodyContentFromDoc(doc);
-    return addCompiledElementToDocument(doc, templateToCompile, injectedScopeProperties);
+                                   doc = document,
+                                   templateToCompile = "Supply a directive template",
+                                   injectedScopeProperties = {},
+                               }) => {
+    const element = addCompiledElementToDocument(doc, templateToCompile, injectedScopeProperties);
+    removeBodyContentFromDocExceptTestedDirective(doc);
+    return element;
 };
 
 export default loadIsolatedDirective;

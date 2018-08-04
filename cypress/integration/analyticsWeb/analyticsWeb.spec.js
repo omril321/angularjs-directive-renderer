@@ -1,5 +1,5 @@
-import '../../src/loadIsolatedDirective';
-import cookies from './cookies';
+import '../../../src/loadIsolatedDirective/index';
+import cookies from '../cookies';
 
 describe('analytics web', () => {
 

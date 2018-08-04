@@ -32,8 +32,10 @@
     "serve:test": "serve ./cypress/integration/testServerBase/",
     "build": "webpack",
     "build:watch": "webpack --watch",
-    "test": "start-server-and-test serve:test http://localhost:5000 cypress:open",
-    "cypress:open": "cypress open"
+    "test": "start-server-and-test serve:test http://localhost:5000 cypress",
+    "test:open": "start-server-and-test serve:test http://localhost:5000 cypress:open",
+    "cypress:open": "cypress open",
+    "cypress": "cypress run"
   },
   "jest": {
     "collectCoverageFrom": [

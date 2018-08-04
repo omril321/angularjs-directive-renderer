@@ -1,1 +1,6 @@
-{}
+{
+  "ignoreTestFiles": [
+    "**/cookies.js",
+    "**/testServerBase/*"
+  ]
+}

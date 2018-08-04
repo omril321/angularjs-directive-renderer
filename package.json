@@ -6,9 +6,7 @@
   "author": "Omri Lavi <omril321@gmail.com>",
   "license": "MIT",
   "private": true,
-  "dependencies": {
-    "angular": "1.5.11"
-  },
+  "dependencies": {},
   "devDependencies": {
     "angular-mocks": "1.5.11",
     "babel-core": "6.26.0",
@@ -23,8 +21,7 @@
     "raw-loader": "0.5.1",
     "serve": "6.2.0",
     "start-server-and-test": "^1.7.0",
-    "webpack": "3.6.0",
-    "webpack-dev-server": "^3.1.5"
+    "webpack": "3.6.0"
   },
   "scripts": {
     "start": "concurrently \"npm run build:watch\" \"npm run serve\"",

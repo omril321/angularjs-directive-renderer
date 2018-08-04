@@ -1,9 +1,9 @@
-import "./loadIsolatedDirective";
+import "../../../src/loadIsolatedDirective/index";
 
 describe('dummy directive test', () => {
 
     it('should visit a page', () => {
-        cy.visit('http://localhost:5000');
+        cy.visit('http://localhost:5000/dummyDirective/');
 
         const scope = {data: {arrayByReference: ['injection', 'by', 'reference'], toBeOverriden: 'this should be overriden'}};
         cy.loadIsolatedDirective({
@@ -11,9 +11,7 @@ describe('dummy directive test', () => {
             injectedScopeProperties: scope,
         });
 
-        //TODO: add to readme: scope can be referenced by the local "scope", or by cy.getTestedElementScope()
         cy.getTestedElementScope().then(elemScope => {
-            console.log("scope : ", scope);
             expect(elemScope.data.toBeOverriden).to.equal('controller has overriden')
         });
 

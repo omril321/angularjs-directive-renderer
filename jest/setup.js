@@ -2,4 +2,4 @@
 import "angular";
 import "angular-mocks";
 
-import "../src/index"
+import "../cypress/integration/testServerBase/dummyDirective/index"

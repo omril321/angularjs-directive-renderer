@@ -22,14 +22,17 @@
     "jest": "21.2.1",
     "raw-loader": "0.5.1",
     "serve": "6.2.0",
-    "webpack": "3.6.0"
+    "start-server-and-test": "^1.7.0",
+    "webpack": "3.6.0",
+    "webpack-dev-server": "^3.1.5"
   },
   "scripts": {
     "start": "concurrently \"npm run build:watch\" \"npm run serve\"",
     "serve": "serve ./build",
+    "serve:test": "serve ./cypress/integration/testServerBase/",
     "build": "webpack",
     "build:watch": "webpack --watch",
-    "test": "jest --watch",
+    "test": "start-server-and-test serve:test http://localhost:5000 cypress:open",
     "cypress:open": "cypress open"
   },
   "jest": {

@@ -15,7 +15,9 @@ const addCompiledElementToDocument = (doc, template, injectedScopeProperties) =>
     const body = doc.body;
 
     const angular = detectDocumentAngular(doc);
-    expect(angular, 'angular should be defined in the loaded application').not.to.be.undefined;
+    if(angular === undefined) {
+        throw new Error('angular should be defined in the loaded application');
+    }
 
     const ngAppElement = doc.querySelector('*[ng-app]');
     const injector = angular.element(ngAppElement).injector(); //TODO: if this works, this needs to run before removing the body elements

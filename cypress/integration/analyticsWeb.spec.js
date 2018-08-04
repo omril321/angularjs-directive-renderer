@@ -1,4 +1,4 @@
-import './loadIsolatedDirective';
+import '../../src/loadIsolatedDirective';
 import cookies from './cookies';
 
 describe('analytics web', () => {

@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>Simple App Test</title>
+
+    <link rel="stylesheet" type="text/css" href="./src/style.css">
+
+    <script src="../angularLib/angular1.5.11.js"></script>
+    <script src="./src/dummy.directive.js"></script>
+  </head>
+  <body data-ng-app="app">
+    <div>
+      This is an application with a defined directive called <div class="quoted-text">< dummy-directive /></div>
+
+      This will be removed in tests, since body contents are removed after compiling the tested directive.
+    </div>
+  </body>
+</html>

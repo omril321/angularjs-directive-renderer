@@ -19,8 +19,8 @@ const addCompiledElementToDocument = (doc, template, injectedScopeProperties) =>
         throw new Error('angular should be defined in the loaded application');
     }
 
-    const ngAppElement = doc.querySelector('*[ng-app]');
-    const injector = angular.element(ngAppElement).injector(); //TODO: if this works, this needs to run before removing the body elements
+    const ngAppElement = doc.querySelector('*[ng-app]') || doc.querySelector('*[data-ng-app]');
+    const injector = angular.element(ngAppElement).injector();
     const $compile = injector.get('$compile');
 
     body.innerHTML += `<div id=${WRAPPER_DIV_ID}>${template}</div>`;

@@ -15,6 +15,7 @@ const template =
 const directive = {
     controller: 'dummy.controller',
     template: template,
+    restrict: 'E',
     scope: {
         injectedName: '@',
         injectedArray: '=',

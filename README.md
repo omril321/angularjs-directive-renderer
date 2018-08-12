@@ -13,7 +13,7 @@ TODO
 ## API Reference
 ### loadIsolatedDirective
 The library exports a main function - `loadIsolatedDirective(config)`, 
-which can be used to load a directive on an almost isolated environment (*).
+which can be used to load a directive on an (almost) isolated environment (*).
 The function expects a single `config` object, with the following properties:
 * `doc`: Document (Optional) - the document of the page which loaded your application. 
 If omitted, the global `document` will be used instead
@@ -27,11 +27,21 @@ and on [AngularJS wiki - JavaScript Prototypal Inheritance](https://stackoverflo
 * `templateToCompile`: String - the template which will render the tested directive instance 
 Don't forget the injected properties, that should match the data from `injectedScopeProperties` (if it exists).
 
-> \* Almost isolated environment 
+> \* (Almost) isolated environment 
 
 Since the library requires a document of a loaded application, 
 it is possible that the loaded page will perform actions that will affect the test.  
 From this reason, it is recommended to use a page which simply loads all of your assets (scripts and stylesheets).
+
+
+#### How it works
+When rendering a test directive from template, the actions are performed:
+1. A clone of the original HTML element is generated in memory.
+2. All of the children of the body of the cloned HTML element are removed.
+3. A new ng-app wrapper `<div>` element is added to the cloned HTML body. 
+The wrapper element has a `data-ng-app` attribute, with the name of the `ng-app` attribute from the original document, which this test runs on.
+4. Next, the original HTML element is removed from the document, and the new (cloned) HTML element is added to the document.
+5. The template is inserted to the application wrapper element. The template is compiled and injected with the properties that the user specified.
 
 ### Cypress commands
 If you use Cypress, the library will automatically add a few useful commands to Cypress when it is `import`-ed.

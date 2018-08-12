@@ -16,21 +16,46 @@ describe('dummy directive test', () => {
 
     htmlsToTest.forEach(html => {
 
-        it(`should compile a template on html: ${html}`, () => {
-            cy.visit(`http://localhost:5000/dummyDirective/${html}`);
+        describe(`html: ${html}`, () => {
+            it(`should compile a template on html: ${html}`, () => {
+                cy.visit(`http://localhost:5000/dummyDirective/${html}`);
 
-            const scope = {data: {arrayByReference: ['injection', 'by', 'reference'], toBeOverriden: 'this should be overriden'}};
-            cy.loadIsolatedDirective({
-                templateToCompile: '<dummy-directive injected-name="by value" injected-array="data.arrayByReference" override-by-controller="data.toBeOverriden"></dummy-directive>',
-                injectedScopeProperties: scope,
+                const scope = {
+                    data: {
+                        arrayByReference: ['injection', 'by', 'reference'],
+                        toBeOverriden: 'this should be overriden'
+                    }
+                };
+                cy.loadIsolatedDirective({
+                    templateToCompile: '<dummy-directive injected-name="by value" injected-array="data.arrayByReference" override-by-controller="data.toBeOverriden"></dummy-directive>',
+                    injectedScopeProperties: scope,
+                });
+
+                cy.getTestedElementScope().then(elemScope => {
+                    expect(elemScope.data.toBeOverriden).to.equal('controller has overriden')
+                });
             });
 
-            cy.getTestedElementScope().then(elemScope => {
-                expect(elemScope.data.toBeOverriden).to.equal('controller has overriden')
+            it('should reset the application state when loading a test template', () => {
+                cy.visit(`http://localhost:5000/dummyDirective/${html}`);
+
+                cy.get('#counter-value').invoke('text').then(text => expect(text).to.equal('counter: 1'));
+
+                const scope = {
+                    data: {
+                        arrayByReference: ['injection', 'by', 'reference'],
+                        toBeOverriden: 'this should be overriden'
+                    }
+                };
+                cy.loadIsolatedDirective({
+                    templateToCompile: '<dummy-directive injected-name="by value" injected-array="data.arrayByReference" override-by-controller="data.toBeOverriden"></dummy-directive>',
+                    injectedScopeProperties: scope,
+                });
+
+                //the dummy directive increases the counter by 3
+                cy.get('#dummy-elem-counter').invoke('text').then(text => expect(text).to.equal('dummy element counter: 3'));
             });
-
-
-            cy.screenshot();
         });
+
     });
 });

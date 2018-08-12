@@ -5,13 +5,18 @@
     <link rel="stylesheet" type="text/css" href="./src/style.css">
 
     <script src="../angularLib/angular1.5.11.js"></script>
-    <script src="./src/dummy.directive.js"></script>
+    <script src="./src/index.js"></script>
   </head>
   <body ng-app="app">
     <div>
       This is an application with a defined directive called <div class="quoted-text">< dummy-directive /></div>
 
       This will be removed in tests, since body contents are removed after compiling the tested directive.
+
+      The following directive changes the state of the application.
+      Later on, we will check the the state is reset.
+
+      <stateful-directive></stateful-directive>
     </div>
   </body>
 </html>

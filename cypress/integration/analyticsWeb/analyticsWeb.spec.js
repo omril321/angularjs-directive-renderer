@@ -1,4 +1,4 @@
-import '../../../src/loadIsolatedDirective/index';
+import '../../../src/renderIsolatedDirective/index';
 import cookies from '../cookies';
 
 describe('analytics web', () => {
@@ -11,7 +11,7 @@ describe('analytics web', () => {
 
     it('should set the bound value to true when clicked', () => {
         let isCalled = false;
-        cy.loadIsolatedDirective({
+        cy.renderIsolatedDirective({
             templateToCompile: `<contextual-report-checkbox-icon class="contextual-report-category-breakdown-card__checkbox-container"
                                                  checkbox-model="checkboxSelected"
                                                  on-checkbox-change="onCheckboxChange"
@@ -35,7 +35,7 @@ describe('analytics web', () => {
 
     it('should fail :(', () => {
         let isCalled = false;
-        cy.loadIsolatedDirective({
+        cy.renderIsolatedDirective({
             templateToCompile: `<contextual-report-checkbox-icon class="contextual-report-category-breakdown-card__checkbox-container"
                                                  checkbox-model="checkboxSelected"
                                                  on-checkbox-change="onCheckboxChange"

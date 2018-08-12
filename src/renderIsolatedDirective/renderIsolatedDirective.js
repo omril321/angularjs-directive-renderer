@@ -50,7 +50,7 @@ const addTestElementFromTemplateAndScopeProperties = (doc, template, injectedSco
     return elementUnderTest;
 };
 
-const loadIsolatedDirective = ({
+const renderIsolatedDirective = ({
                                    doc = document,
                                    templateToCompile = "Supply a directive template",
                                    injectedScopeProperties = {},
@@ -84,4 +84,4 @@ const loadIsolatedDirective = ({
     return addTestElementFromTemplateAndScopeProperties(doc, templateToCompile, injectedScopeProperties);
 };
 
-export default loadIsolatedDirective;
+export default renderIsolatedDirective;

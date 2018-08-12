@@ -1,4 +1,4 @@
-import "../../../src/loadIsolatedDirective/index";
+import "../../../src/renderIsolatedDirective/index";
 
 describe('dummy directive test', () => {
 
@@ -26,7 +26,7 @@ describe('dummy directive test', () => {
                         toBeOverriden: 'this should be overriden'
                     }
                 };
-                cy.loadIsolatedDirective({
+                cy.renderIsolatedDirective({
                     templateToCompile: '<dummy-directive injected-name="by value" injected-array="data.arrayByReference" override-by-controller="data.toBeOverriden"></dummy-directive>',
                     injectedScopeProperties: scope,
                 });
@@ -47,7 +47,7 @@ describe('dummy directive test', () => {
                         toBeOverriden: 'this should be overriden'
                     }
                 };
-                cy.loadIsolatedDirective({
+                cy.renderIsolatedDirective({
                     templateToCompile: '<dummy-directive injected-name="by value" injected-array="data.arrayByReference" override-by-controller="data.toBeOverriden"></dummy-directive>',
                     injectedScopeProperties: scope,
                 });

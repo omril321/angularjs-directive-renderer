@@ -1,16 +1,16 @@
-import loadIsolatedDirective from "./loadIsolatedDirective";
+import renderIsolatedDirective from "./renderIsolatedDirective";
 import detectDocumentAngular from "./detectDocumentAngular";
 
 const testedDirectiveElementAlias = 'testedDirectiveElement';
 
 const isCypressEnabled = () => cy || Cypress;
 
-const addLoadDirectiveCommand = () => {
-    Cypress.Commands.add('loadIsolatedDirective', (paramsObj) => {
+const addRenderDirectiveCommand = () => {
+    Cypress.Commands.add('renderIsolatedDirective', (paramsObj) => {
         cy.document()
             .then(cyDoc => {
                 paramsObj.doc = paramsObj.doc || cyDoc;
-                let isolatedDirective = loadIsolatedDirective(paramsObj);
+                let isolatedDirective = renderIsolatedDirective(paramsObj);
                 const angular = detectDocumentAngular(cyDoc);
                 return angular.element(isolatedDirective)
             }).as(testedDirectiveElementAlias);
@@ -43,7 +43,7 @@ const addCypressCommandsIfPossible = () => {
 
     if (isCypressEnabled()) {
         const commandInjectors = [
-            addLoadDirectiveCommand,
+            addRenderDirectiveCommand,
             addGetTestedDirectiveDomElementCommand,
             addGetAngularCommand,
             addGetTestedElementScope,

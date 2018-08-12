@@ -11,8 +11,8 @@ Read the instructions below to see how you can write full UI tests for your comp
 TODO
 
 ## API Reference
-### loadIsolatedDirective
-The library exports a main function - `loadIsolatedDirective(config)`, 
+### renderIsolatedDirective
+The library exports a main function - `renderIsolatedDirective(config)`, 
 which can be used to load a directive on an (almost) isolated environment (*).
 The function expects a single `config` object, with the following properties:
 * `doc`: Document (Optional) - the document of the page which loaded your application. 
@@ -47,8 +47,8 @@ The wrapper element has a `data-ng-app` attribute, with the name of the `ng-app`
 If you use Cypress, the library will automatically add a few useful commands to Cypress when it is `import`-ed.
 
 
-* `cy.loadIsolatedDirective` - loads an isolated directive using Cypress' IFrame's document as the tested document.
-The function requires the same configuration object as the library's `loadIsolatedDirective`, *except* for the `doc` property - 
+* `cy.renderIsolatedDirective` - loads an isolated directive using Cypress' IFrame's document as the tested document.
+The function requires the same configuration object as the library's `renderIsolatedDirective`, *except* for the `doc` property - 
 Cypress will supply the document. 
 If `doc` will be defined, it will be used instead of Cypress' document
 This way, you can easily test your app using the following flow:
@@ -58,7 +58,7 @@ This way, you can easily test your app using the following flow:
       });
     
     it('should look as expected', () => {
-      cy.loadIsolatedDirective({
+      cy.renderIsolatedDirective({
           templateToCompile: '<my-awesome-directive/>'
       })
       .screenshot();
@@ -79,7 +79,7 @@ Can be used for special requirements, where you wish to use `angular` directly f
 
 * `cy.getTestedDirectiveDomElement()` - quickly access your compiled directive's DOM element, and start a Cypress chain: 
 ```javascript
-    cy.loadIsolatedDirective({
+    cy.renderIsolatedDirective({
             templateToCompile: '<my-awesome-directive/>'
         })
         .find('input')
@@ -104,7 +104,7 @@ If you need the element as an AngularJS element, use in combination with `cy.get
 
 The following example will load the tested directive as an isolated component:
 ```javascript
-    import loadIsolatedDirective from 'loadIsolatedDirective'; //1
+    import renderIsolatedDirective from 'renderIsolatedDirective'; //1
     
     describe('my-directive', () => {
         beforeEach(() => {
@@ -117,7 +117,7 @@ The following example will load the tested directive as an isolated component:
                 testArr: ['wow', 'much', 'data'],
             };
             
-            const testedElement = loadIsolatedDirective({ 
+            const testedElement = renderIsolatedDirective({ 
                         doc: document, //3
                         templateToCompile: `<my-directive name="data.name" some-array="data.testArr"/>`, //4
                         injectedScopeProperties: {data}, //5

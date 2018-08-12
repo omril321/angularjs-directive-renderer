@@ -5,15 +5,18 @@ describe('dummy directive test', () => {
     const htmlsToTest = [
         'index_angular1.2_body_ng-app.html',
         'index_angular1.2_html_data-ng-app.html',
+        'index_angular1.2_child_ng-app.html',
         'index_angular1.5_body_data-ng-app.html',
         'index_angular1.5_html_ng-app.html',
+        'index_angular1.5_child_data-ng-app.html',
         'index_angular1.7_body_ng-app.html',
-        'index_angular1.7_html_data-ng-app.html'
+        'index_angular1.7_html_data-ng-app.html',
+        'index_angular1.7_child_ng-app.html',
     ];
 
     htmlsToTest.forEach(html => {
 
-        it(`should visit a page (${html})`, () => {
+        it(`should compile a template on html: ${html}`, () => {
             cy.visit(`http://localhost:5000/dummyDirective/${html}`);
 
             const scope = {data: {arrayByReference: ['injection', 'by', 'reference'], toBeOverriden: 'this should be overriden'}};

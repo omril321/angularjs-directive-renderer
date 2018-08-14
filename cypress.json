@@ -1,6 +1,7 @@
 {
   "ignoreTestFiles": [
     "**/cookies.js",
-    "**/testServerBase/*"
+    "**/testServerBase/**",
+    "**/analyticsWeb/**"
   ]
 }

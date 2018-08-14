@@ -1,4 +1,4 @@
-import detectDocumentAngular from './detectDocumentAngular';
+const detectDocumentAngular = require('./detectDocumentAngular');
 
 const TEST_ELEMENT_WRAPPER_ID = "directive-test-wrapper-element";
 const TEST_APP_CONTAINER_ID = "directive-test-app-container";

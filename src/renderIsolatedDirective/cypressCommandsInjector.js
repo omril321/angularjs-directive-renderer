@@ -1,5 +1,5 @@
-import renderIsolatedDirective from "./renderIsolatedDirective";
-import detectDocumentAngular from "./detectDocumentAngular";
+const renderIsolatedDirective = require("./renderIsolatedDirective");
+const detectDocumentAngular = require("./detectDocumentAngular");
 
 const testedDirectiveElementAlias = 'testedDirectiveElement';
 

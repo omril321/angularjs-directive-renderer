@@ -1,4 +1,4 @@
-import renderIsolatedDirective from './renderIsolatedDirective'
-import './cypressCommandsInjector';
+const renderIsolatedDirective = require('./renderIsolatedDirective');
+require('./cypressCommandsInjector');
 
-export default renderIsolatedDirective;
+module.exports = renderIsolatedDirective;

@@ -1,3 +1,15 @@
 language: node_js
+cache:
+  directories:
+    - ~/.npm
+notifications:
+  email: true
 node_js:
-  - "6"
+  - '6'
+prepublish:
+  - npm run build
+after_success:
+  - npm run travis-deploy-once "npm run semantic-release"
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/

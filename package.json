@@ -1,6 +1,6 @@
 {
   "name": "angularjs-directive-rendered",
-  "version": "1.0.0",
+  "version": "0.0.0-semanticaly-released",
   "description": "A tool for rendering AngularJS directives, aimed for UI tests",
   "main": "build/renderIsolatedDirective.js",
   "author": "Omri Lavi <omril321@gmail.com>",
@@ -16,7 +16,9 @@
     "raw-loader": "0.5.1",
     "start-server-and-test": "^1.7.0",
     "webpack": "3.6.0",
-    "http-server": "^0.11.1"
+    "http-server": "^0.11.1",
+    "travis-deploy-once": "^5.0.2",
+    "semantic-release": "^15.9.8"
   },
   "scripts": {
     "start": "concurrently \"npm run build:watch\" \"npm run serve\"",
@@ -27,7 +29,9 @@
     "test": "start-server-and-test serve:test http://localhost:5000 cypress",
     "test:open": "start-server-and-test serve:test http://localhost:5000 cypress:open",
     "cypress:open": "cypress open",
-    "cypress": "cypress run"
+    "cypress": "cypress run",
+    "travis-deploy-once": "travis-deploy-once",
+    "semantic-release": "semantic-release"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -38,5 +42,9 @@
       "^.+\\.(js|jsx)$": "babel-jest",
       "^(?!.*\\.(js|jsx|json)$)": "<rootDir>/jest/fileTransform.js"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/omril321/angularjs-directive-renderer.git"
   }
 }

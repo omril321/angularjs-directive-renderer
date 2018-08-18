@@ -6,6 +6,8 @@ Ever wished you could use Storybook on your legacy AngularJS project?
 Well, you still can't. But you can use this library to achieve very close results.
 Read the instructions below to see how you can write full UI tests for your components (with actual CSS!). 
 
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
 ## Install
 
 TODO
@@ -139,6 +141,13 @@ It is expected that `angular` will be defined on the page, and that an `ng-app` 
 Default value is an empty object (`{}`)
 6. Interact with the returned element, as test it as you wish.
 
+
+## Development
+
+### Commit Messages
+This project uses [Commitizen](https://github.com/commitizen/cz-cli) for commit messages conventions.  
+When committing, you should use `Commitizen` to generate the commit message in the expected format.  
+For that, you can run `npm run commit`.
 
 ## License
 

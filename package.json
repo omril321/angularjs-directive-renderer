@@ -11,14 +11,16 @@
     "babel-core": "6.26.0",
     "babel-loader": "7.1.2",
     "babel-preset-env": "1.6.0",
+    "commitizen": "^2.10.1",
     "concurrently": "3.5.0",
     "cypress": "^3.0.2",
-    "raw-loader": "0.5.1",
-    "start-server-and-test": "^1.7.0",
-    "webpack": "3.6.0",
+    "cz-conventional-changelog": "^2.1.0",
     "http-server": "^0.11.1",
+    "raw-loader": "0.5.1",
+    "semantic-release": "^15.9.8",
+    "start-server-and-test": "^1.7.0",
     "travis-deploy-once": "^5.0.2",
-    "semantic-release": "^15.9.8"
+    "webpack": "3.6.0"
   },
   "scripts": {
     "start": "concurrently \"npm run build:watch\" \"npm run serve\"",
@@ -31,7 +33,8 @@
     "cypress:open": "cypress open",
     "cypress": "cypress run",
     "travis-deploy-once": "travis-deploy-once",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "commit": "git-cz"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -46,5 +49,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/omril321/angularjs-directive-renderer.git"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

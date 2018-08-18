@@ -8,6 +8,9 @@
   "private": false,
   "dependencies": {},
   "devDependencies": {
+    "@semantic-release/changelog": "^3.0.0",
+    "@semantic-release/git": "^7.0.1",
+    "@semantic-release/npm": "^5.0.2",
     "babel-core": "6.26.0",
     "babel-loader": "7.1.2",
     "babel-preset-env": "1.6.0",

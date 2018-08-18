@@ -36,16 +36,6 @@
     "semantic-release": "semantic-release",
     "commit": "git-cz"
   },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.js"
-    ],
-    "setupTestFrameworkScriptFile": "<rootDir>/jest/setup.js",
-    "transform": {
-      "^.+\\.(js|jsx)$": "babel-jest",
-      "^(?!.*\\.(js|jsx|json)$)": "<rootDir>/jest/fileTransform.js"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/omril321/angularjs-directive-renderer.git"

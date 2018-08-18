@@ -5,7 +5,7 @@
   "main": "build/renderIsolatedDirective.js",
   "author": "Omri Lavi <omril321@gmail.com>",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "dependencies": {},
   "devDependencies": {
     "babel-core": "6.26.0",

@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/omril321/angularjs-directive-renderer/compare/v1.0.0...v1.0.1) (2018-08-19)
+
+
+### Bug Fixes
+
+* **deployemnt trigger:** this triggers a deployment + added keywords to package ([ca25a43](https://github.com/omril321/angularjs-directive-renderer/commit/ca25a43))
+
 # 1.0.0 (2018-08-18)
 
 

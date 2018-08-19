@@ -1,13 +1,24 @@
 {
   "name": "angularjs-directive-renderer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A tool for rendering AngularJS directives, aimed for UI tests",
   "main": "dist/renderIsolatedDirective.js",
   "author": "Omri Lavi <omril321@gmail.com>",
   "license": "MIT",
   "private": false,
-  "files": ["dist/**"],
-  "keywords": ["angularjs", "component", "directive", "test", "ui", "css", "cypress", "render"],
+  "files": [
+    "dist/**"
+  ],
+  "keywords": [
+    "angularjs",
+    "component",
+    "directive",
+    "test",
+    "ui",
+    "css",
+    "cypress",
+    "render"
+  ],
   "dependencies": {},
   "devDependencies": {
     "@semantic-release/changelog": "^3.0.0",

@@ -3,7 +3,7 @@ const path = require("path");
 module.exports = {
   entry: ["./src/renderIsolatedDirective/index.js"],
   output: {
-    path: path.join(__dirname, "build/"),
+    path: path.join(__dirname, "dist/"),
     filename: "renderIsolatedDirective.js"
   },
   module: {

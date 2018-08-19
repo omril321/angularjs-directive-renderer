@@ -7,6 +7,9 @@ Well, you still can't. But you can use this library to achieve very close result
 Read the instructions below to see how you can write full UI tests for your components (with actual CSS!). 
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![npm version](https://badge.fury.io/js/angularjs-directive-renderer.svg)](https://badge.fury.io/js/angularjs-directive-renderer)
+[![Build Status](https://travis-ci.org/omril321/angularjs-directive-renderer.svg?branch=master)](https://travis-ci.org/omril321/angularjs-directive-renderer)
 
 ## Install
 
@@ -143,10 +146,26 @@ Default value is an empty object (`{}`)
 
 
 ## Development
+### CI
+When contributing, keep in mind the following CI flow:
+1. The code is added to a locally-cloned repo
+1. A commit is added using `Commitizen`, by running `npm run commit`
+1. After a PR, the contributed code is pushed to the repo
+1. `Travis` build is triggered, and runs the following (each failed step prevents future steps):  
+    1. Test
+    1. Generate changelog automatically by using `Semantic Release`.  
+    If a new version will be deployed to npm (see next step), update the changelog and add it to git.
+    1. Publish a new version to npm if needed.  
+    `Semantic Release` will scan the commits to see which changes were added since the last release.  
+    This way, `Semantic Release` will automatically decide which version (major, minor or patch upgrade) should be published.
+    1. The changelog is automatically added to `git` (again, by `Semantic Release`).  
+    A new tag which matches the npm version from previous step is added to the current commit.
+    The commit will be authored by `semantic-release-bot`
+
 
 ### Commit Messages
 This project uses [Commitizen](https://github.com/commitizen/cz-cli) for commit messages conventions.  
-When committing, you should use `Commitizen` to generate the commit message in the expected format.  
+When committing, you should use `Commitizen` to generate the commit message in [AngularJS Git Commit Message Convention](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit).  
 For that, you can run `npm run commit`.
 
 ## License

@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "A tool for rendering AngularJS directives, aimed for UI tests",
   "main": "dist/renderIsolatedDirective.js",
-  "author": "Omri Lavi <omril321@gmail.com>",
+  "author": "Omri Lavi",
   "license": "MIT",
   "private": false,
   "files": [

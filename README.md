@@ -13,7 +13,9 @@ Read the instructions below to see how you can write full UI tests for your comp
 
 ## Install
 
-TODO
+```bash
+npm install --save-dev angularjs-directive-renderer
+```
 
 ## API Reference
 ### renderIsolatedDirective

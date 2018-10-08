@@ -11,6 +11,15 @@ Read the instructions below to see how you can write full UI tests for your comp
 [![npm version](https://badge.fury.io/js/angularjs-directive-renderer.svg)](https://badge.fury.io/js/angularjs-directive-renderer)
 [![Build Status](https://travis-ci.org/omril321/angularjs-directive-renderer.svg?branch=master)](https://travis-ci.org/omril321/angularjs-directive-renderer)
 
+## Features
+- :door: Isolated directive - test only what you need!
+- :white_check_mark: Simple and easy - try and see for yourself!
+- :art: Using real CSS - screenshots are fun
+- :point_right: Interactive tests - click, hover, drag...
+- :ok_woman: Flexible - inject custom `$scope` as needed
+- :rocket: No dependencies - even AngularJS is used from your app! 
+- :electric_plug: Cypress integration
+
 ## Install
 
 ```bash

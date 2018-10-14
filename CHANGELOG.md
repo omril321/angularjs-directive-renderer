@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/omril321/angularjs-directive-renderer/compare/v1.0.1...v2.0.0) (2018-10-14)
+
+
+### Bug Fixes
+
+* **package was published in the wrong way:** .npmignore was missing, caused an empty publication of ([eaf25e3](https://github.com/omril321/angularjs-directive-renderer/commit/eaf25e3))
+
+
+### BREAKING CHANGES
+
+* **package was published in the wrong way:** the library should now be published properly
+
 ## [1.0.1](https://github.com/omril321/angularjs-directive-renderer/compare/v1.0.0...v1.0.1) (2018-08-19)
 
 

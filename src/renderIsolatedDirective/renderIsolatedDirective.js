@@ -33,7 +33,7 @@ const removeAllChildrenOfElement = (elem) => {
     children.forEach(child => child.remove());
 };
 
-const addTestElementFromTemplateAndScopeProperties = (doc, template, injectedScopeProperties) => {
+const addTestElementFromTemplateAndScopeProperties = (doc, injectedScopeProperties) => {
     const angular = detectDocumentAngular(doc);
     const appContainer = doc.querySelector(`#${TEST_APP_CONTAINER_ID}`);
 
@@ -81,7 +81,7 @@ const renderIsolatedDirective = ({
     //add the template (inside a wrapper) to the test app
     appContainer.innerHTML += `<div id="${TEST_ELEMENT_WRAPPER_ID}">${templateToCompile}</div>`;
 
-    return addTestElementFromTemplateAndScopeProperties(doc, templateToCompile, injectedScopeProperties);
+    return addTestElementFromTemplateAndScopeProperties(doc, injectedScopeProperties);
 };
 
 export default renderIsolatedDirective;

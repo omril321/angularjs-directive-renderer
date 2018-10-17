@@ -1,6 +1,6 @@
 {
   "name": "angularjs-directive-renderer",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A tool for rendering AngularJS directives, aimed for UI tests",
   "main": "dist/renderIsolatedDirective.js",
   "author": "Omri Lavi",

@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/omril321/angularjs-directive-renderer/compare/v2.0.0...v2.0.1) (2018-10-17)
+
+
+### Bug Fixes
+
+* **travis build package:** travis was wrongly configured, not creating distribution files ([4e4f4a9](https://github.com/omril321/angularjs-directive-renderer/commit/4e4f4a9))
+
 # [2.0.0](https://github.com/omril321/angularjs-directive-renderer/compare/v1.0.1...v2.0.0) (2018-10-14)
 
 

@@ -9,6 +9,7 @@ node_js:
 prepublish:
   - npm run build
 after_success:
+  - npm run build
   - npm run travis-deploy-once "npm run semantic-release" || exit 1
 branches:
   except:

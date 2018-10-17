@@ -5,3 +5,9 @@ yarn-error.log
 .idea
 .DS_Store
 .npmrc
+cypress
+cypress.json
+.releaserc.json
+.travis.yml
+webpack.config.js
+.babelrc

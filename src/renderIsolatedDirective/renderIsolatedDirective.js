@@ -84,4 +84,4 @@ const renderIsolatedDirective = ({
     return addTestElementFromTemplateAndScopeProperties(doc, injectedScopeProperties);
 };
 
-export default renderIsolatedDirective;
+module.exports = renderIsolatedDirective;

@@ -1,4 +1,4 @@
-import "../../../src/renderIsolatedDirective/index";
+import "../../../dist/renderIsolatedDirective";
 
 describe('dummy directive test', () => {
 

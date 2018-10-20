@@ -39,7 +39,7 @@ const addDummyDirectiveModule = () => {
     const template =
         `
             <div>
-                <div>Controller overriden value: <b>{{overrideByController}}</b></div>
+                <div>Controller overriden value: <b>{{overrideByController.value}}</b></div>
                 <div>injectedName: <b class="red-background">{{injectedName}}</b></div>
             
                 <ul> Array values:
@@ -71,7 +71,9 @@ const addDummyDirectiveModule = () => {
         counterService.increaseCounter();
         counterService.increaseCounter();
 
-        $scope.overrideByController = 'controller has overriden';
+        $scope.overrideByController.value = 'controller has overriden';
+        $scope.injectedArray.push('is', 'updated');
+        $scope.addedValue = $scope.injectedName + ', with some added value';
 
         $scope.getCounter = counterService.getCounter;
     }

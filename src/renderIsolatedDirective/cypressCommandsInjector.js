@@ -27,7 +27,7 @@ const addGetTestedElementScope = () => {
             .then(elem => cy.getAngular()
                 .then(angular => {
                     const ngElem = angular.element(elem);
-                    return ngElem.scope() || ngElem.isolateScope();
+                    return ngElem.isolateScope() || ngElem.scope();
                 }));
     })
 };

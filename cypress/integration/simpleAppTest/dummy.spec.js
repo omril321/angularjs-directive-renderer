@@ -17,22 +17,66 @@ describe('dummy directive test', () => {
     htmlsToTest.forEach(html => {
 
         describe(`html: ${html}`, () => {
-            it(`should compile a template on html: ${html}`, () => {
+            it('should update object injected by reference, in the isolated element scope AND the injected scope', () => {
                 cy.visit(`http://localhost:5000/dummyDirective/${html}`);
 
-                const scope = {
+                const injectedScope = {
                     data: {
                         arrayByReference: ['injection', 'by', 'reference'],
-                        toBeOverriden: 'this should be overriden'
+                        toBeOverriden: {value: 'override me'}
                     }
                 };
                 cy.renderIsolatedDirective({
                     templateToCompile: '<dummy-directive injected-name="by value" injected-array="data.arrayByReference" override-by-controller="data.toBeOverriden"></dummy-directive>',
-                    injectedScopeProperties: scope,
+                    injectedScopeProperties: injectedScope,
                 });
 
                 cy.getTestedElementScope().then(elemScope => {
-                    expect(elemScope.data.toBeOverriden).to.equal('controller has overriden')
+                    const expectedValue = 'controller has overriden';
+                    expect(injectedScope.data.toBeOverriden.value).to.equal(expectedValue);
+                    expect(elemScope.overrideByController.value).to.equal(expectedValue);
+                });
+            });
+
+            it('should insert new members to injected array, affecting element scope and parent scope', () => {
+                cy.visit(`http://localhost:5000/dummyDirective/${html}`);
+
+                const injectedScope = {
+                    data: {
+                        arrayByReference: ['injection', 'by', 'reference'],
+                        toBeOverriden: {value: 'override me'}
+                    }
+                };
+                cy.renderIsolatedDirective({
+                    templateToCompile: '<dummy-directive injected-name="by value" injected-array="data.arrayByReference" override-by-controller="data.toBeOverriden"></dummy-directive>',
+                    injectedScopeProperties: injectedScope,
+                });
+
+                cy.getTestedElementScope().then(elemScope => {
+                    const expectedArray = ['injection', 'by', 'reference', 'is', 'updated'];
+                    expect(JSON.stringify(injectedScope.data.arrayByReference)).to.equal(JSON.stringify(expectedArray));
+                    expect(JSON.stringify(elemScope.injectedArray)).to.equal(JSON.stringify(expectedArray));
+                });
+            });
+
+            it('should add a property to the element isolated scope, based on the injected scope property which is passed by value', () => {
+                cy.visit(`http://localhost:5000/dummyDirective/${html}`);
+
+                const injectedScope = {
+                    data: {
+                        arrayByReference: ['injection', 'by', 'reference'],
+                        toBeOverriden: {value: 'override me'},
+                        byValue: 'by value'
+                    }
+                };
+                cy.renderIsolatedDirective({
+                    templateToCompile: '<dummy-directive injected-name="{{data.byValue}}" injected-array="data.arrayByReference" override-by-controller="data.toBeOverriden"></dummy-directive>',
+                    injectedScopeProperties: injectedScope,
+                });
+
+                cy.getTestedElementScope().then(elemScope => {
+                    debugger;
+                    expect(elemScope.addedValue).to.equal('by value, with some added value');
                 });
             });
 

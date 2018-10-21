@@ -118,6 +118,9 @@ If you need the element as an AngularJS element, use in combination with `cy.get
 
 ## Usage example
 
+[See the sample project!](https://github.com/omril321/sample-angularjs-directive-renderer)
+
+
 The following example will load the tested directive as an isolated component:
 ```javascript
     import renderIsolatedDirective from 'renderIsolatedDirective'; //1

@@ -75,7 +75,6 @@ describe('dummy directive test', () => {
                 });
 
                 cy.getTestedElementScope().then(elemScope => {
-                    debugger;
                     expect(elemScope.addedValue).to.equal('by value, with some added value');
                 });
             });
